@@ -19,10 +19,27 @@
             font-size: 18px;
             color: #6c757d;
         }
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+        }
     </style>
+    <script>
+        let count = 5; // Waktu hitungan mundur dalam detik
+        function countdown() {
+            if (count > 0) {
+                document.getElementById("countdown").textContent = count;
+                count--;
+                setTimeout(countdown, 1000);
+            }
+        }
+        window.onload = countdown;
+    </script>
 </head>
 <body>
     <h1>⚠ Website Sedang Maintenance ⚠</h1>
     <p>BebekGo sedang sibuk mohon sabar yakk hehe</p>
+    <p>Anda akan dialihkan dalam <span id="countdown">5</span> detik...</p>
 </body>
 </html>

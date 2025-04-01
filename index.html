@@ -1,62 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Assistant</title>
+    <title>Maintenance</title>
+    <meta http-equiv="refresh" content="15;url=https://griyamasterlandhass.my.id/lovelace">
     <style>
         body {
-            background-color: #111;
-            color: #e1e1e1;
-            font-family: Roboto, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .container {
+            font-family: Arial, sans-serif;
             text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
         }
-
-        .logo {
-            width: 100px;
-            height: auto;
-            margin-bottom: 20px;
+        h1 {
+            color: #dc3545;
         }
-
-        .message {
+        p {
             font-size: 18px;
-            margin-bottom: 10px;
+            color: #6c757d;
         }
-
-        .retry {
-            color: #1e90ff;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .lines {
-            width: 100%;
-            height: 200px;
-            background: repeating-linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0.1),
-                rgba(255, 255, 255, 0.1) 10px,
-                transparent 10px,
-                transparent 20px
-            );
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
         }
     </style>
+    <script>
+        let count = 15; // Waktu hitungan mundur dalam detik
+        function countdown() {
+            if (count > 0) {
+                document.getElementById("countdown").textContent = count;
+                count--;
+                setTimeout(countdown, 1000);
+            }
+        }
+        window.onload = countdown;
+    </script>
 </head>
 <body>
-    <div class="container">
-        <img src="new_logo.png" alt="New Logo" class="logo">
-        <div class="message">Unable to connect to Home Assistant.</div>
-        <div class="retry" onclick="location.reload()">Retry Now</div>
-        <div class="lines"></div>
-    </div>
+    <h1>⚠ Website Sedang Maintenance ⚠</h1>
+    <p>BebekGo sedang sibuk</p>
+    <p>Jika sudah selesai, BebekGo akan mengembalikan dalam <span id="countdown">15</span> detik...</p>
 </body>
 </html>
-

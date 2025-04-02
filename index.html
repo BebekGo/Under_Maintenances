@@ -35,15 +35,11 @@
             }
         }
 
-        window.onload = function() {
-            countdown();
-            
-            // Ensure redirect happens only after the first page load
-            if (!sessionStorage.getItem("visited")) {
-                sessionStorage.setItem("visited", "true");
-            } else {
-                window.location.href = "https://griyamasterlandhass.my.id/lovelace";
-            }
+        window.onload = countdown;
+
+        // Redirect user if they refresh the page
+        window.onbeforeunload = function () {
+            window.location.href = "https://griyamasterlandhass.my.id/lovelace";
         };
     </script>
 </head>

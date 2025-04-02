@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance</title>
-    <meta http-equiv="refresh" content="15;url=https://griyamasterlandhass.my.id/lovelace">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,13 +26,24 @@
     </style>
     <script>
         let count = 15; // Waktu hitungan mundur dalam detik
+
+        // Fungsi untuk menghitung mundur
         function countdown() {
             if (count > 0) {
                 document.getElementById("countdown").textContent = count;
                 count--;
                 setTimeout(countdown, 1000);
+            } else {
+                // Ketika hitungan mundur selesai, segarkan halaman
+                location.reload();
             }
         }
+
+        // Deteksi refresh halaman dan redirect jika perlu
+        if (performance.navigation.type === 1) {
+            window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+        }
+
         window.onload = countdown;
     </script>
 </head>

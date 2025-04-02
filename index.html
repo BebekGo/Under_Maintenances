@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance</title>
-    <meta http-equiv="refresh" content="15;url=https://griyamasterlandhass.my.id/lovelace">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -39,13 +38,14 @@
         }
 
         window.onload = function() {
-            // Set a sessionStorage flag to check if the page is being refreshed
-            if (!sessionStorage.getItem("isRefreshed")) {
-                sessionStorage.setItem("isRefreshed", "true");
+            // Check if we're on the maintenance page already (via query parameter or a flag)
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('maintenance')) {
+                // If we are on the maintenance page, proceed with the countdown
                 countdown();
             } else {
-                // Redirect after refresh
-                window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+                // If not, redirect to the maintenance page
+                window.location.href = "https://griyamasterlandhass.my.id/maintenance?maintenance=true";
             }
         };
     </script>

@@ -25,27 +25,37 @@
         }
     </style>
     <script>
-        let count = 15; // Waktu hitungan mundur dalam detik
+        let count = 15; // Countdown time in seconds
         function countdown() {
             if (count > 0) {
                 document.getElementById("countdown").textContent = count;
                 count--;
                 setTimeout(countdown, 1000);
             } else {
-                // When countdown reaches 0, refresh the page
+                // Refresh the page when countdown finishes
                 location.reload();
             }
         }
 
         window.onload = function() {
-            // Check if we're on the maintenance page already (via query parameter or a flag)
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('maintenance')) {
-                // If we are on the maintenance page, proceed with the countdown
-                countdown();
+            // Check if sessionStorage already contains 'redirected' flag
+            if (!sessionStorage.getItem('redirected')) {
+                // If not, set the 'redirected' flag in sessionStorage to avoid loop
+                sessionStorage.setItem('redirected', 'true');
+                
+                // Check if we're on the maintenance page already
+                const urlParams = new URLSearchParams(window.location.search);
+                if (!urlParams.has('maintenance')) {
+                    // Redirect to the maintenance page with the 'maintenance' query parameter
+                    window.location.href = "https://griyamasterlandhass.my.id/maintenance?maintenance=true";
+                } else {
+                    // If already on the maintenance page, start the countdown
+                    countdown();
+                }
             } else {
-                // If not, redirect to the maintenance page
-                window.location.href = "https://griyamasterlandhass.my.id/maintenance?maintenance=true";
+                // If already redirected, stay on the current page (maintenance page)
+                // Just start the countdown or refresh when done
+                countdown();
             }
         };
     </script>

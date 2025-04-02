@@ -32,14 +32,21 @@
                 document.getElementById("countdown").textContent = count;
                 count--;
                 setTimeout(countdown, 1000);
+            } else {
+                // When countdown reaches 0, refresh the page
+                location.reload();
             }
         }
 
-        window.onload = countdown;
-
-        // Redirect user if they refresh the page
-        window.onbeforeunload = function () {
-            window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+        window.onload = function() {
+            // Set a sessionStorage flag to check if the page is being refreshed
+            if (!sessionStorage.getItem("isRefreshed")) {
+                sessionStorage.setItem("isRefreshed", "true");
+                countdown();
+            } else {
+                // Redirect after refresh
+                window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+            }
         };
     </script>
 </head>

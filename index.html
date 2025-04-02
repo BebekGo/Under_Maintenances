@@ -35,15 +35,16 @@
             }
         }
 
-        window.onload = countdown;
-
-        // Check if the page has already been visited and redirect if needed
-        if (localStorage.getItem("visited")) {
-            window.location.href = "https://griyamasterlandhass.my.id/lovelace";
-        } else {
-            // Mark that the page has been visited
-            localStorage.setItem("visited", "true");
-        }
+        window.onload = function() {
+            countdown();
+            
+            // Ensure redirect happens only after the first page load
+            if (!sessionStorage.getItem("visited")) {
+                sessionStorage.setItem("visited", "true");
+            } else {
+                window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+            }
+        };
     </script>
 </head>
 <body>

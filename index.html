@@ -34,7 +34,13 @@
                 setTimeout(countdown, 1000);
             }
         }
+
         window.onload = countdown;
+
+        // Redirect user if they refresh the page
+        window.onbeforeunload = function () {
+            window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+        };
     </script>
 </head>
 <body>

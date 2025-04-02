@@ -37,10 +37,13 @@
 
         window.onload = countdown;
 
-        // Redirect user if they refresh the page
-        window.onbeforeunload = function () {
+        // Check if the page has already been visited and redirect if needed
+        if (localStorage.getItem("visited")) {
             window.location.href = "https://griyamasterlandhass.my.id/lovelace";
-        };
+        } else {
+            // Mark that the page has been visited
+            localStorage.setItem("visited", "true");
+        }
     </script>
 </head>
 <body>

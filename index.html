@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Maintenance</title>
+    <meta http-equiv="refresh" content="15;url=https://griyamasterlandhass.my.id/lovelace">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,42 +26,15 @@
         }
     </style>
     <script>
-        let count = 15; // Countdown time in seconds
+        let count = 15; // Waktu hitungan mundur dalam detik
         function countdown() {
             if (count > 0) {
                 document.getElementById("countdown").textContent = count;
                 count--;
                 setTimeout(countdown, 1000);
-            } else {
-                // Refresh the page when countdown finishes
-                location.reload();
             }
         }
-
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const isMaintenancePage = urlParams.has('maintenance');
-
-            // Check if sessionStorage already contains 'redirected' flag
-            if (!sessionStorage.getItem('redirected')) {
-                if (isMaintenancePage) {
-                    // If we are on the maintenance page, set 'redirected' flag to avoid infinite loop
-                    sessionStorage.setItem('redirected', 'true');
-                    countdown();
-                } else {
-                    // If we are not on the maintenance page, and the page rule is active, redirect to the maintenance page
-                    window.location.href = "https://maintenance.griyamasterlandhass.my.id/maintenance?maintenance=true";
-                }
-            } else {
-                // If already redirected, stay on the current page (maintenance page) and start the countdown
-                if (isMaintenancePage) {
-                    countdown();
-                } else {
-                    // If the page rule is off and we are not on the maintenance page, redirect to the main site
-                    window.location.href = "https://griyamasterlandhass.my.id/lovelace";
-                }
-            }
-        };
+        window.onload = countdown;
     </script>
 </head>
 <body>

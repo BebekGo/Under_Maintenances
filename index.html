@@ -38,7 +38,6 @@
         }
 
         window.onload = function() {
-            // Check if the maintenance query parameter is present
             const urlParams = new URLSearchParams(window.location.search);
             const isMaintenancePage = urlParams.has('maintenance');
 
@@ -49,8 +48,8 @@
                     sessionStorage.setItem('redirected', 'true');
                     countdown();
                 } else {
-                    // If we are not on the maintenance page, and the page rule is off, redirect to the maintenance page
-                    window.location.href = "https://griyamasterlandhass.my.id/maintenance?maintenance=true";
+                    // If we are not on the maintenance page, and the page rule is active, redirect to the maintenance page
+                    window.location.href = "https://maintenance.griyamasterland.my.id/maintenance?maintenance=true";
                 }
             } else {
                 // If already redirected, stay on the current page (maintenance page) and start the countdown
@@ -58,7 +57,7 @@
                     countdown();
                 } else {
                     // If the page rule is off and we are not on the maintenance page, redirect to the main site
-                    window.location.href = "https://griyamasterlandhass.my.id/lovelace";
+                    window.location.href = "https://griyamasterland.my.id";
                 }
             }
         };

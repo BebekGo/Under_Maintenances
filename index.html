@@ -10,6 +10,12 @@
             text-align: center;
             padding: 50px;
             background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full screen height */
+            margin: 0; /* Remove default margin */
+            flex-direction: column; /* Stack elements vertically */
         }
         h1 {
             color: #dc3545;
@@ -22,6 +28,47 @@
             font-size: 24px;
             font-weight: bold;
             color: #28a745;
+        }
+
+        /* Animasi bebek */
+        .duck-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .duck {
+            width: 100px;
+            height: 100px;
+            background-image: url(https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjZ2dWg4am12a2xwemg2djIxNG5jcHkydHNmYjJtbnl2ZG8wZ2o1ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/88hQl2UDfkduQWtlv9/giphy.gif); /* Ganti dengan URL gambar bebek */
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: shake 1s infinite;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: rotate(-10deg);
+            }
+            25% {
+                transform: rotate(10deg);
+            }
+            50% {
+                transform: rotate(-10deg);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
+        .clock {
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
     <script>
@@ -39,17 +86,56 @@
             }
         }
 
+        // Fungsi untuk menampilkan waktu real-time
+        function updateClock() {
+            const now = new Date();
+
+            const clock = {
+                hour: now.getHours(),
+                minute: now.getMinutes(),
+                second: now.getSeconds(),
+                day: now.getDate(),
+                weekday: now.toLocaleString('id-ID', { weekday: 'long' }),
+                bulan: now.toLocaleString('id-ID', { month: 'long' }),
+                tahun: now.getFullYear()
+            };
+
+            // Format jam, menit, dan detik dengan dua digit
+            clock.hour = clock.hour < 10 ? '0' + clock.hour : clock.hour;
+            clock.minute = clock.minute < 10 ? '0' + clock.minute : clock.minute;
+            clock.second = clock.second < 10 ? '0' + clock.second : clock.second;
+            
+
+            // Menampilkan waktu di elemen dengan id "clock"
+            document.getElementById('clock').textContent = 
+                `${clock.weekday}, ${clock.day} ${clock.bulan} ${clock.tahun} - ${clock.hour}:${clock.minute}:${clock.second}`;
+        }
+
+        // Memperbarui waktu setiap detik
+        setInterval(updateClock, 1000);
+
         // Deteksi refresh halaman dan redirect jika perlu
         if (performance.navigation.type === 1) {
             window.location.href = "https://griyamasterlandhass.my.id/lovelace";
         }
 
-        window.onload = countdown;
+        window.onload = function() {
+            countdown();
+            updateClock();  // Menampilkan waktu pada saat halaman dimuat
+        };
     </script>
 </head>
 <body>
     <h1>⚠ Website Sedang Maintenance ⚠</h1>
-    <p>BebekGo sedang sibuk</p>
     <p>Jika sudah selesai, BebekGo akan mengembalikan dalam <span id="countdown">5</span> detik...</p>
+
+    <div class="duck-container">
+        <div class="duck"></div>
+        <p>BebekGo mohon maaf atas ketidaknyamanannya!</p>
+    </div>
+
+    <div class="clock" id="clock">
+        <!-- Waktu real-time akan ditampilkan di sini -->
+    </div>
 </body>
 </html>
